@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+    </style>
+</head>
+<body>
+   <div id="app">
+      <form @submit.prevent="post">
+          <input type="text" v-model.trim="msg">
+          <button @click="getPost">提交查询</button>
+      </form>
+   </div>
+    <script src="https://unpkg.com/vue@next"></script> 
+    <script>
+        Vue.createApp({
+            data(){
+                return{
+                    msg:""
+                }
+            },
+            methods:{
+                post(){
+                    console.log(this.msg);
+                },
+                getPost(){
+                    this.$axios.post("url",{
+                        userId:this.msg,
+                    }).then(res => {
+                        console.log(res.data);
+                    })
+                },
+            }
+        }).mount("#app")
+    </script>
+</body>
+
+</html>
